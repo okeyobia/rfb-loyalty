@@ -1,0 +1,30 @@
+{
+    "name": "RfbLocation",
+    "fields": [
+        {
+            "fieldName": "locationName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "runDayOfWeek",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "rfbEvent",
+            "otherEntityRelationshipName": "rfbLocation",
+            "relationshipName": "rfbEvent"
+        }
+    ],
+    "changelogDate": "20190607182718",
+    "entityTableName": "rfb_location",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span>Rfb Events</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rfb-event" [routerLink]="['/rfb-event/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Rfb Event
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="rfbEvents">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="eventDate"><span>Event Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="eventCode"><span>Event Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rfbLocationId"><span>Rfb Location</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rfbEvent of rfbEvents ;trackBy: trackId">
+                <td><a [routerLink]="['/rfb-event', rfbEvent.id, 'view' ]">{{rfbEvent.id}}</a></td>
+                <td>{{rfbEvent.eventDate | date:'mediumDate'}}</td>
+                <td>{{rfbEvent.eventCode}}</td>
+                <td>
+                    <div *ngIf="rfbEvent.rfbLocationId">
+                        <a [routerLink]="['../rfb-location', rfbEvent.rfbLocationId , 'view' ]" >{{rfbEvent.rfbLocationId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/rfb-event', rfbEvent.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/rfb-event', rfbEvent.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'rfb-event', { outlets: { popup: rfbEvent.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="rfbEvents && rfbEvents.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

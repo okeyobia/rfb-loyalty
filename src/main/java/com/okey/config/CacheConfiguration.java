@@ -45,6 +45,12 @@ public class CacheConfiguration {
             createCache(cm, com.okey.domain.User.class.getName() + ".authorities");
             createCache(cm, com.okey.domain.PersistentToken.class.getName());
             createCache(cm, com.okey.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, com.okey.domain.RfbLocation.class.getName());
+            createCache(cm, com.okey.domain.RfbLocation.class.getName() + ".rfbEvents");
+            createCache(cm, com.okey.domain.RfbEvent.class.getName());
+            createCache(cm, com.okey.domain.RfbEvent.class.getName() + ".rfbEventAttends");
+            createCache(cm, com.okey.domain.RfbEventAttendance.class.getName());
+            createCache(cm, com.okey.domain.RfbUser.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

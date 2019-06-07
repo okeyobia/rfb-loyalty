@@ -1,0 +1,28 @@
+{
+    "name": "RfbUser",
+    "fields": [
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "rfbLocation",
+            "otherEntityRelationshipName": "rfbUser",
+            "relationshipName": "homeLocation",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190607182721",
+    "entityTableName": "rfb_user",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
