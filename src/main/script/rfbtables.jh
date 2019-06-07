@@ -1,0 +1,38 @@
+entity RfbLocation {
+	locationName String,
+    runDayOfWeek String
+}
+
+entity RfbEvent {
+	eventDate LocalDate,
+    eventCode String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity RfbEventAttendance {
+	attendanceDate LocalDate
+}
+
+entity RfbUser {
+	userName String
+}
+
+relationship OneToMany {
+	RfbLocation{rfbEvent} to RfbEvent,
+    RfbEvent{rfbEventAttend} to RfbEventAttendance
+}
+
+relationship OneToOne {
+	RfbEventAttendance{rfbUser} to RfbUser,
+    RfbUser{homeLocation} to RfbLocation
+}
+
+dto * with mapstruct
+
+service all with serviceImpl
+
+// Set pagination options
+paginate RfbLocation, RfbEvent with pagination
+paginate RfbEventAttendance with infinite-scroll
+
